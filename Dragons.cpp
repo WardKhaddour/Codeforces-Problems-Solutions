@@ -1,38 +1,27 @@
 #include <bits/stdc++.h>
+
 using namespace std;
-int main()
-{
-    int n, s, c = 0;
-    int x[1000], y[1000];
+
+int main(){
+    int s, n;
     cin >> s >> n;
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> x[i] >> y[i];
+    vector<pair<int, int> > dragons;
+    bool loose = false;
+    for(int i = 0;i < n;++i){
+        int x, y;
+        cin >> x >> y;
+        dragons.push_back(make_pair(x ,y));
     }
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = i; j < n; ++j)
-        {
-            if (x[i] > x[j])
-            {
-                swap(x[i], x[j]);
-                swap(y[i], y[j]);
-            }
+
+    sort(dragons.begin(), dragons.end());
+    for(int i = 0;i < n; ++i){
+        if(s > dragons[i].first) {
+            s += dragons[i].second;
         }
-    }
-    for (int i = 0; i < n; ++i)
-    {
-        if (s > x[i])
-        {
-            s += y[i];
-            c++;
-        }
-        else
+        else{
+            loose = true;
             break;
+        }
     }
-    if (c == n)
-        cout << "YES";
-    else
-        cout << "NO";
-    return 0;
+    loose ? cout << "NO" :cout << "YES";
 }
