@@ -71,16 +71,23 @@ bool visited[N] = {false};
 
 void solve()
 {
-    ll n;
-    cin >> n;
-    for (ll i = (ll)1e7; i > 1; --i)
-    {
-        while (n % (i * i) == 0)
-        {
-            n /= i;
-        }
-    }
-    cout << n << ln;
+    int n;
+    string s, ans = "";
+    cin >> n >> s;
+    map<int, string> m;
+    m[0] = m[1] = "";
+    m[2] = "2";
+    m[3] = "3";
+    m[4] = "322";
+    m[5] = "5";
+    m[6] = "53";
+    m[7] = "7";
+    m[8] = "7222";
+    m[9] = "7332";
+    for (auto i : s)
+        ans += m[i - '0'];
+    sort(ans.rbegin(), ans.rend());
+    cout << ans;
 }
 
 int main()

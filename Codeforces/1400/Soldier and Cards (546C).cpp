@@ -71,16 +71,47 @@ bool visited[N] = {false};
 
 void solve()
 {
-    ll n;
-    cin >> n;
-    for (ll i = (ll)1e7; i > 1; --i)
+    int n, k1, k2, x, maxFights = 110, counter = 0;
+    cin >> n >> k1;
+    deque<int> q1, q2;
+    rep(i, k1)
     {
-        while (n % (i * i) == 0)
-        {
-            n /= i;
-        }
+        cin >> x;
+        q1.pb(x);
     }
-    cout << n << ln;
+    cin >> k2;
+    rep(i, k2)
+    {
+        cin >> x;
+        q2.pb(x);
+    }
+    while (k1 > 0 && k2 > 0)
+    {
+        if (counter >= maxFights)
+        {
+            cout << -1 << ln;
+            return;
+        }
+        int i = q1.front(), j = q2.front();
+        q1.pop_front();
+        q2.pop_front();
+        if (i > j)
+        {
+            q1.push_back(j);
+            q1.push_back(i);
+            k1++;
+            k2--;
+        }
+        else
+        {
+            q2.push_back(i);
+            q2.push_back(j);
+            k1--;
+            k2++;
+        }
+        counter++;
+    }
+    cout << counter << " " << (k1 > k2 ? 1 : 2) << ln;
 }
 
 int main()
